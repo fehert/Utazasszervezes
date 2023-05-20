@@ -15,6 +15,7 @@ namespace utazas1
                 Console.WriteLine("1.Utas adatok felvétele");
                 Console.WriteLine("2.Utas adatok módasítása");
                 Console.WriteLine("3.Utazás felvétele");
+                Console.WriteLine("4.Utazásra jelentkezés");
                 Console.WriteLine("5.Kilépés");
                 char valasz = Console.ReadKey().KeyChar;
                 switch (valasz)
@@ -36,6 +37,10 @@ namespace utazas1
                         Console.Clear();
 
                         return;
+                    case '4':
+                        Console.WriteLine("Adja meg az uticélt!");
+                        string vuticel = Console.ReadLine();
+                        break;
                     case '3':
                         Console.WriteLine("Adja meg az uticélt");
                         string uticel = Console.ReadLine();
