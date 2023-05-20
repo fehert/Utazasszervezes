@@ -16,7 +16,10 @@ namespace utazas1
                 Console.WriteLine("2.Utas adatok módasítása");
                 Console.WriteLine("3.Utazás felvétele");
                 Console.WriteLine("4.Utazásra jelentkezés");
-                Console.WriteLine("5.Kilépés");
+                Console.WriteLine("5.Előleg felvétele");
+                Console.WriteLine("6.Előleg módisítása");
+                Console.WriteLine("7.Utaslista nyomtatása");
+                Console.WriteLine("8.Kilépés");
                 char valasz = Console.ReadKey().KeyChar;
                 switch (valasz)
                 {
@@ -50,7 +53,13 @@ namespace utazas1
                         Console.WriteLine("Adja meg az uticélt!");
                         string vuticel = Console.ReadLine();
                         break;
-                    case '5':
+                    case '5':                 
+                        break;
+                    case '6':                 
+                        break;
+                    case '7':                 
+                        break;
+                    case '8':
                         System.Environment.Exit(0);
                         break;
                     default:
