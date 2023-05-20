@@ -37,10 +37,6 @@ namespace utazas1
                         Console.Clear();
 
                         return;
-                    case '4':
-                        Console.WriteLine("Adja meg az uticélt!");
-                        string vuticel = Console.ReadLine();
-                        break;
                     case '3':
                         Console.WriteLine("Adja meg az uticélt");
                         string uticel = Console.ReadLine();
@@ -49,6 +45,10 @@ namespace utazas1
                         Console.WriteLine("Adja meg a maximum létszámot");
                         string maxletszam = Console.ReadLine();
                         utazas1.Add(new Utazas(uticel, ar, maxletszam));
+                        break;
+                    case '4':
+                        Console.WriteLine("Adja meg az uticélt!");
+                        string vuticel = Console.ReadLine();
                         break;
                     case '5':
                         System.Environment.Exit(0);
