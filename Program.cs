@@ -10,6 +10,10 @@ namespace utazas1
         {
             List<Utas> utas1 = new List<Utas>();
             List<Utazas> utazas1 = new List<Utazas>();
+            List<string> osszerak = new List<string>();
+            string nev = "";
+            string uticel = "";
+            int ar = 0;
             while (true)
             {
                 Console.WriteLine("[1] Utas adatok felvétele");
@@ -27,7 +31,7 @@ namespace utazas1
                     case '1':
                         Console.Clear();
                         Console.WriteLine("Adja meg az utas nevét!");
-                        string nev = Console.ReadLine();
+                         nev = Console.ReadLine();
                         Console.WriteLine("Adja meg az utas címét!");
                         string cim = Console.ReadLine();
                         Console.WriteLine("Adja meg az utas telefonszámát!");
@@ -60,9 +64,9 @@ namespace utazas1
                         return;
                     case '3':
                         Console.WriteLine("Adja meg az uticélt");
-                        string uticel = Console.ReadLine();
+                        uticel = Console.ReadLine();
                         Console.WriteLine("Adja meg az árat");
-                        string ar = Console.ReadLine();
+                        ar =int.Parse( Console.ReadLine());
                         Console.WriteLine("Adja meg a maximum létszámot");
                         int maxletszam = int.Parse( Console.ReadLine());
                         utazas1.Add(new Utazas(uticel, ar, maxletszam));
@@ -96,6 +100,18 @@ namespace utazas1
                         Console.Clear();
                         break;
                     case '5':
+                        Console.WriteLine("Adja meg az előleget");
+                        int eloleg = int.Parse(Console.ReadLine());
+                        int kulombseg = ar - eloleg;
+                        if (ar >= kulombseg)
+                        {
+                            osszerak.Add(nev + "\t" + uticel + "\t" + kulombseg);
+                        }
+                        else if (ar < kulombseg)
+                        {
+                            Console.WriteLine("Az előleg túl sok!");
+                        }
+                       
                         break;
                     case '6':
                         break;
@@ -103,14 +119,23 @@ namespace utazas1
                         Console.WriteLine("Melyik utazásra szeretnéd?");
                         string melyik = Console.ReadLine();
                         StreamWriter fajl = new StreamWriter("nyomtatas.txt");
+                        fajl.WriteLine("Név"+'\t'+"Cím"+'\t'+"Telefonszám"+'\t'+"Fizetendő");
                         for (int i = 0; i < utazas1.Count; i++)
                         {
                             if (utazas1[i].getUticel() == melyik)
                             {
+                                int eloleg1 = 0;  
+                                for (int e = 0; e <osszerak.Count; e++)
+                                {
+                                    if (osszerak[e].Split('\t')[1]==melyik)
+                                    {
+                                        eloleg1 = int.Parse(osszerak[e].Split('\t')[2]);
+                                    }
+                                }
                                 List<Utas> jelentkezettek = utazas1[i].Jelentkezes();
                                 for (int j = 0; j < jelentkezettek.Count; j++)
                                 {
-                                    fajl.WriteLine(jelentkezettek[j].getSor());
+                                    fajl.WriteLine(jelentkezettek[j].getSor()+'\t'+eloleg1);
                                     
                                 }
                             }
@@ -165,10 +190,10 @@ namespace utazas1
     class Utazas
     {
         string uticel;
-        string ar;
+        int ar;
         int maxl;
         List<Utas> jelentkezes = new List<Utas>();
-        public Utazas(string uuticel, string uar, int umaxl)
+        public Utazas(string uuticel, int uar, int umaxl)
         {
             uticel = uuticel;
             ar = uar;
