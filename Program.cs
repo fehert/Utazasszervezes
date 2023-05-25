@@ -36,8 +36,25 @@ namespace utazas1
                         break;
                     case '2':
                         Console.WriteLine("Amelyik utast szeretné módosítani adja meg a nevét!");
-                        string valtozas =Console.ReadLine();
+                        string valtozas = Console.ReadLine();
                         Console.Clear();
+                        for (int i = 0; i < utas1.Count; i++)
+                        {
+                            if (utas1[i].getNev() == valtozas)
+                            {
+                                utas1.RemoveAt(i);
+                                Console.WriteLine("Adja meg az utas nevét!");
+                                string mnev = Console.ReadLine();
+                                Console.WriteLine("Adja meg az utas címét!");
+                                string mcim = Console.ReadLine();
+                                Console.WriteLine("Adja meg az utas telefonszámát!");
+                                string mtelefonsz = Console.ReadLine();
+                                utas1.Add(new Utas(mnev, mcim, mtelefonsz));
+                                Console.Clear();
+                                break;
+                            }
+
+                        }
 
                         return;
                     case '3':
@@ -52,12 +69,29 @@ namespace utazas1
                     case '4':
                         Console.WriteLine("Adja meg az uticélt!");
                         string vuticel = Console.ReadLine();
+                        Console.Clear();
                         break;
-                    case '5':                 
+                    case '5':
                         break;
-                    case '6':                 
+                    case '6':
                         break;
-                    case '7':                 
+                    case '7':
+                        Console.WriteLine("Melyik utazásra szeretnéd?");
+                        string melyik = Console.ReadLine();
+                        StreamWriter fajl = new StreamWriter("nyomtatas.txt");
+                        for (int i = 0; i <utazas1.Count; i++)
+                        {
+                            if (utazas1[i].getUticel()==melyik)
+                            {
+                                List<Utas> jelentkezettek = utazas1[i].Jelentkezes();
+                                for (int j = 0; j < jelentkezettek.Count; j++)
+                                {
+                                    fajl.WriteLine(jelentkezettek.Count);
+                                }
+                            }
+                           
+                        }
+                       
                         break;
                     case '8':
                         System.Environment.Exit(0);
@@ -73,6 +107,7 @@ namespace utazas1
         string nev;
         string cim;
         string telefonsz;
+        List<Utazas> jelentkezes = new List<Utazas>();
 
         public Utas(string unev, string ucim, string utelefonsz)
         {
@@ -89,12 +124,18 @@ namespace utazas1
         {
             return nev;
         }
+        public List<Utazas> Jelentkezes()
+        {
+
+            return jelentkezes;
+        }
     }
     class Utazas
     {
         string uticel;
         string ar;
         string maxl;
+        List<Utas> jelentkezes = new List<Utas>();
         public Utazas(string uuticel, string uar, string umaxl)
         {
             uticel = uuticel;
@@ -104,6 +145,15 @@ namespace utazas1
         public string getUtazas()
         {
             return uticel + ar + maxl;
+        }
+        public string getUticel()
+        {
+            return uticel;
+        }
+        public List<Utas> Jelentkezes()
+        {
+
+            return jelentkezes;
         }
     }
 }
