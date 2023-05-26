@@ -113,6 +113,25 @@ namespace utazas1
 
                         break;
                     case '6':
+                            Console.WriteLine("Adja meg a nevet");
+                        string nev2 = Console.ReadLine();
+                        Console.WriteLine("Adja meg az uticélt");
+                        string uticel2 = Console.ReadLine();
+                        Console.WriteLine("Adja meg a módosított előleget");
+                        int meloleg = int.Parse(Console.ReadLine());
+                        for (int i = 0; i < osszerak.Count; i++)
+                        {
+                            if (nev2 == nev && uticel2 == uticel && ar >= kulombseg)
+                            {
+                                int bontas = int.Parse(osszerak[i].Split('\t')[2] + meloleg);
+                                string ujsor = nev2 + "\t" + uticel2 + "\t" + bontas;
+                                Console.WriteLine(ujsor);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Nincs ilyen név/uticel!");
+                            }
+                        }
                         break;
                     case '7':
                         Console.WriteLine("Melyik utazásra szeretnéd?");
